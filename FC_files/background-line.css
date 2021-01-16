@@ -1,0 +1,40 @@
+/* Add some padding inside the card container */
+.over-backgroung-container {
+  animation: over-backgroung-rectanglein 1s ease-in-out forwards;
+  width: 100%;
+  display: flex;
+  background-color: white;
+  box-shadow: 8px 4px 8px 4px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+}
+
+/* On mouse-over, add a deeper shadow */
+.over-backgroung-container:hover {
+  box-shadow: 16px 8px 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes over-backgroung-rectanglein {
+  from {
+    transform: rotateX(-90deg);
+    transform-origin: top;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  position: absolute;
+  width: 75%;
+  height: 500px;
+  margin: auto;
+  perspective: 1000px;
+  /*background-color: red;*/
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
