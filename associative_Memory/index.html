@@ -1,22 +1,253 @@
 <!doctype html>
 <html>
   <head>
-    <title>Hopfield Nets</title>
+    <title>Associative Memory</title>
     <link rel="stylesheet" href="styles/main.css"></link>
+    <link rel="shortcut icon" type="image/x-icon" href="../FC_files/brain2.svg">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="../FC_files/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/all.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/simple-line-icons.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/slick.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/animate.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/magnific-popup.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../FC_files/background-line.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script type="text/javascript" async
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+
     <script type="text/javascript">
     window.app = {};
     </script>
+
     <script src="scripts/canvas.js"></script>
     <script src="scripts/controls.js"></script>
     <script src="scripts/hopfield.js"></script>
     <script src="scripts/main.js"></script>
   </head>
+
   <body>
-    <div id="drawings"></div>
-    <div id="controls">
-      <button id="toggle-clock">Start Running</button>
-      <button id="train-network">Train Network</button>
-    </div>
-    <div id="main-drawing"></div>
+
+    <!-- mobile header -->
+    <header class="mobile-header-1" style="opacity: 1;">
+      <div class="container">
+        <!-- menu icon -->
+        <div class="menu-icon d-inline-flex mr-4">
+          <button>
+            <span></span>
+          </button>
+        </div>
+        <!-- logo image -->
+        <div class="site-logo">
+          <a href="#home">
+            <!-- <h1 style="font-size: 50px; color: #ffffff">Francis Carter</h1> -->
+            <!-- <img src="./FC_files/name.svg" alt="Francis Carter"> -->
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- desktop header -->
+    <header class="desktop-header-1 d-flex align-items-start flex-column">
+
+      <!-- logo image -->
+      <div class="site-logo" style="align-self: center">
+        <a href="../index.html">
+          <h1 style="font-size: 30px; color: #ffffff">See other projects</h1>
+          <!-- <img src="./FC_files/name.svg" alt="Francis Carter" class="mb-4"> -->
+        </a>
+      </div>
+
+      <!-- main menu -->
+      <nav style="height: 100%">
+        <ul class="vertical-menu scrollspy">
+          <li class="active"><a href="../index.html" class="nav-link"><i></i>No other projects ATM</a></li>
+        </ul>
+      </nav>
+
+    </header>
+
+
+    <!-- main layout -->
+    <main class="content">
+
+      <!-- section about -->
+      <div id="about" class="container">
+        <div id="about">
+          <br>
+          <br>
+              <h1 class="section-title wow fadeInUp" style="text-align: center">Associative Memory and Energy Models Intro</h1>
+          <hr>
+          <div class="container">
+            <div class="container">
+              <p>
+                Probably the most famous one-liner in neuroscience is: "neurons that fire together wire together".
+                This is generally taken to refer to <a href="https://en.wikipedia.org/wiki/Hebbian_theory">Hebb's rule (1949)</a> for associative memory (ie. the type of memory that allows us to recognize objects regardless of minor modifications and noise).
+                This remained purely theoretical for decades until <a href="https://en.wikipedia.org/wiki/Hopfield_network">John Hopfield (1982)</a> popularized it through a model of fully connected binary (active/inactive) neurons now called Hopfield networks.
+                While there are many ways of learning synaptic weights for a hopfield network, Hebb's rule remains the simplest to interpret and is shown below:
+
+                $$w_{ij} = \frac{1}{n}\sum_{\mu = 1}^{n}\epsilon_{i}^{\mu}\epsilon_{j}^{\mu}$$
+
+                where \(w_{ij}\) is the synaptic weight between neurons i and j, \(n\) is the number of patterns to learn, and \(\epsilon_{i}^{\mu}\) corresponds to the activity of neuron i in pattern \(\mu\).
+                If we then provide the network with a new pattern of activation, the individual neuron activations will evolve to match a previously learned pattern.
+                A beautiful analogy here can be drawn between this model and the <a href="https://en.wikipedia.org/wiki/Ising_model">Ising model</a> in thermodynamics. In both, we can express the energy of the system at any time with a function that depends on the interaction between the system's parts. Both models' energy equation takes the form:
+
+                $$E(\epsilon) = - \sum_{i,j}w_{ij}\epsilon_i\epsilon_j + \sum_{i}\epsilon_i\theta_i$$
+
+                where \(E(\epsilon)\) is the energy of state \(\epsilon\), \(\epsilon\) is a vector of neuron activations (for Hopfield) or of atomic spins (for Ising). \(w_{ij}\) is the interaction mediated by synapses (for Hopfield) or magnetic interactions (for Ising). Lastly, \(\theta_i\) corresponds to the neural activation threshold (for Hopfield), and to an external magnetic field (for Ising).
+                In both these models, the system will evolve over time to reduce the energy by moving away from states where "high energy" interactions require change.
+                </p>
+                <p>
+                Did I mention that analogies are a form of associative memory?
+                <a href=""></a>
+                </p>
+                <p>
+                  A demo is provided below. To use it, enter three patterns at the top (eg: X, T, and O touching the border), and press "Train Network". You can then enter a copy of one of these patterns at the bottom, add a bit of noise, and press "Start Running".
+                </p>
+                <br>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- section home -->
+      <!-- <section id="home" class="" style="text-align: center"> -->
+      <div class="main">
+        <div id="drawings" style="text-align: center"></div>
+        <div id="controls" style="text-align: center">
+          <button id="toggle-clock" class="button">Start Running</button>
+          <button id="train-network" class="button">Train Network</button>
+        </div>
+        <div id="main-drawing" style="text-align: center"></div>
+      </div>
+      <!-- </section> -->
+
+
+      <div id="problems" class="container">
+        <div id="about">
+          <br>
+          <br>
+              <h3 class="section-title wow fadeInUp" style="text-align: left">When does this model fail?</h3>
+          <hr>
+          <div class="container">
+            <div class="container">
+              <p>
+                If you played around with the demo, you may have noticed that training on similar (ie. correlated) patterns will lead to errors. In fact, almost any visual motif such as letters will contain a great deal of correlation across patterns.
+                However, if patterns are not correlated (something we might expect from neurons in higher level cortices due to representational changes and compression), the number of patterns that can be learned by a network scales linearly with the number of neurons in that network
+                (we can learn approximately <a href="http://uppsala.kiderlen.de/ml/mlproject.pdf">\(0.15*n\) patterns</a>, where n is the number of neurons), which seems like a reasonable number for practical purposes.
+                <a href=""></a>
+                </p>
+                <p>
+                Interestingly, the network activity seems to be attracted to the learned patterns as well as to the negative of the learned patterns (try flipping black and white above). To me, this suggests something elegant about our cognitive processes. If neurons above represent ideas, then learning through the Hebbian rule leads to a kind of <a href="https://en.wikipedia.org/wiki/Yin_and_yang">duality (yin and yang)</a> in the associative conceptual world. We cannot have the concept of good without the concept of bad, or big without small, or love without ... you get what I mean. Please take this paragraph with a grain of salt, this is not a common view I have seen (nor ever seen), and is only applicable to this form of associative memory, which is not the only thing our brain are capable of.
+                </p>
+                <p>
+                  Another possible problem with this model is that it is deterministic (ie. the evolution of the neural activations does not contain random fluctuations). This leads to possibility of the network activations getting stuck in a local minimum.
+                  Here, we must be familiar with the idea of an energy landscape, which can be thought of as an altitude map used in hiking. The idea is that if we always go downhill, we may never reach the bottom of the mountain/landscape if we get stuck in a bowl/local minimum.
+                  To increase the chance of reaching the lowest point in the landscape, we may need to walk uphill, and to do that we need energy. In the microscopic/thermodynamic world we are discussing, energy takes the form of heat or random movement. We would therefore like to add randomness to the process of associating a new pattern with the learned ones.
+                  Enter the <a href="http://uppsala.kiderlen.de/ml/mlproject.pdf">Boltzmann Machine</a>, a <a href="https://en.wikipedia.org/wiki/Boltzmann_distribution">well named</a> generalization of Hopfield networks.
+                </p>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="boltzmann" class="container">
+        <div id="about">
+          <br>
+          <br>
+              <h3 class="section-title wow fadeInUp" style="text-align: left">Boltzmann Machine, energy, and RBMs</h3>
+          <hr>
+          <div class="container">
+            <div class="container">
+              <p>
+                The energy function of Boltzmann machines is identical to that of that of the hopfield network. The only difference is in the evolution of neural activations. Neurons for which we know the activity are held fixed while the others evolve according to the equation:
+                 $$p(\mbox{unit i is active}) = \frac{1}{1+e^{-G/T}}$$
+                 where G is the difference in energy between the inactive and active state of neuron i, and T is a parameter defining the temperature of the system. Notice that when \(T \rightarrow 0\), only the sign of G counts, and the neuron is certain to reduce it's energy level. This corresponds to the Hopfield case.
+                 The Boltzmann machine therefore provides a distribution over matches to the templates learned.
+                </p>
+                <p>
+                Small tangent: <a href="https://en.wikipedia.org/wiki/Annealing_(metallurgy)">annealing</a> is a process in metallurgy whereby you improving the physical properties of a metal through a sequence of heating and slowly cooling the metal so that it recrystallizes. Essentially, the crystallized structure corresponds to a global minimum in the energy function of the metal.
+                The same process, called simulated analogy-ing (actually called simulated annealing), can be used with Boltzmann machines to find the global minimum of their energy function.
+                </p>
+                <p>
+                  While an implementation of the boltzmann machine is easy on a small scale such as in the demo above, training this system and performing simulated analogy-ing can become very expensive with higher dimensional data. One way around this issue is to use a Restricted Boltzmann Machine (RBM).
+                  RBMs essentially divide the neurons into separate sets of visible and hidden neurons, and "restrict" connections by allowing connections between sets but not within sets of neurons, allowing for quicker training.
+                </p>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="considerations" class="container">
+        <div id="about">
+          <br>
+          <br>
+              <h3 class="section-title wow fadeInUp" style="text-align: left">Considerations</h3>
+          <hr>
+          <div class="container">
+            <div class="container">
+              <p>
+                The RBM can be further extended into the concept of a <a href="https://en.wikipedia.org/wiki/Deep_belief_network">Deep Belief Network</a>, which are similar to RBMs with multiple layers of hidden neurons. This class of neural networks has many training methods, depending on the purpose, which I will not be covering here. 
+                However, it provides a direct link to other interesting concepts. For example, much of machine learning now depends on universal function approximation through deep learning, representational learning, and the latent variable learning, topics which I hope to cover in a future post.
+              </p>
+              <p>
+                At this point, many experts would agree that we are far out domain of neuroscience and "learning deeply" about ML.
+                However, we must not become too engrossed by our fascination with specific methods and lose the big picture.
+                A strong argument <a href="https://www.ling.upenn.edu/~kroch/courses/lx400/Gallistel-King_chaps1-9.pdf">can be made</a> that many of the current views on computational tools in machine learning and neuroscience are lacking a key ingredient.
+                Is it possible to write and read generic, non-associational variables in neural network connections (in a biologically plausible way)? If yes, how much can this advance AI? If no, how do our brains learn?
+                </p>
+
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+      <section id="contact">
+
+        <div class="" style="background-color: #46455F">
+
+          <!-- section title -->
+          <br>
+          <h1 class="" style="text-align: center; color:#ffffff">Contact Info</h1>
+      <hr>
+          <!-- <div class="spacer" data-height="60" style="height: 60px;"></div> -->
+
+            <p style="text-align: center; color:#ffffff">I'm open to discussing anything, including research, projects, or work opportunities!</p>
+            <p style="text-align: center; color:#ffffff">Just send me an email:</p>
+            <p style="text-align: center"> <a href="mailto:francis44carter@gmail.com">francis44carter@gmail.com</a></p>
+            <ul class="social-icons light list-inline mb-0 mt-4" style="text-align: center; color:#ffffff">
+              <li class="list-inline-item"><a href="https://www.linkedin.com/in/francis-carter-676b5a203/" class="fa fa-linkedin"></a></li>
+              <li class="list-inline-item"><a href="https://github.com/carterfrancis" class="fa fa-github"></a></li>
+              <li class="list-inline-item"><a href="https://scholar.google.com/citations?user=5eYFGiMAAAAJ&hl=en" class="fa fa-graduation-cap"></a></li>
+              </li>
+            </ul>
+            <div class="spacer" data-height="40" style="height: 40px;"></div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
   </body>
+
 </html>

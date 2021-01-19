@@ -1,6 +1,6 @@
 (function() {
 
-  var INTERVAL = 20;
+  var INTERVAL = 200;
   var ACTIVATION_THRESHOLD = 0;
   var CONVERGE_NODES = 5;
 

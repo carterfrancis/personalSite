@@ -1,7 +1,7 @@
 (function() {
 
   var PICTURE_SIZE = 5;
-  var CANVAS_SIZE = 100;
+  var CANVAS_SIZE = 150;
 
   function Canvas() {
     this._cells = [];
@@ -12,6 +12,21 @@
     this._element.width = CANVAS_SIZE;
     this._element.height = CANVAS_SIZE;
     this._element.className = 'drawing';
+
+    // fill grid
+   //  for (var i = 1; i < PICTURE_SIZE; i++) {
+   //    var ctx = this._element.getContext("2d");
+   //    ctx.moveTo(CANVAS_SIZE*i/PICTURE_SIZE, 0);
+   //    ctx.lineTo(CANVAS_SIZE*i/PICTURE_SIZE, CANVAS_SIZE);
+   //    ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+   //    ctx.stroke();
+   //    ctx.moveTo(0, CANVAS_SIZE*i/PICTURE_SIZE);
+   //    ctx.lineTo(CANVAS_SIZE, CANVAS_SIZE*i/PICTURE_SIZE);
+   //    ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+   //    ctx.stroke();
+   // }
+
+
     this._registerMouseEvents();
   }
 
